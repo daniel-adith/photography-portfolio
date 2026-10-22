@@ -1,7 +1,7 @@
 export const CONTENT = {
   meta: {
     title: "Daniel Adith Portfolio",
-    description: "Daniel Adith memotret untuk brand, hotel, hingga berbagai macam acara.",
+    description: "Saya Daniel Adith, fotografer untuk brand, hotel, dan berbagai acara. Lihat enam proyek pilihan saya.",
     name: "Daniel Adith",
     year: "@2026"
   },
@@ -12,7 +12,7 @@ export const CONTENT = {
     { id: "contact", label: "Contact" }
   ],
   intro: {
-    kicker: "Photography Portfolio",
+    kicker: "Halo, ini portfolio saya",
     title: "The untold story in every frame"
   },
   hero: {
@@ -22,28 +22,28 @@ export const CONTENT = {
     cta: { label: "Let’s talk!", target: "contact" }
   },
   about: {
-    title: "The untold story in every frame",
+    title: "Kenalan dulu, saya Daniel.",
     paragraphs: [
-      "Daniel Adith memotret untuk brand, hotel, hingga berbagai macam acara.",
-      "Di luar foto yang bagus, pastinya terdapat momen yang terasa nyata & banyak yang tidak tahu mengenai ini. Hasilnya rapi, tenang, dan tetap terasa manusia."
+      "Saya memotret untuk brand, hotel, dan berbagai acara.",
+      "Saya mencari momen yang terasa nyata di balik foto yang bagus. Banyak orang tidak menyadarinya. Hasilnya rapi dan tenang, tapi tetap terasa manusia."
     ]
   },
   approach: {
-    title: "The style that “different”",
+    title: "Cara saya memotret",
     intro: "Tiga hal yang saya jaga di setiap frame.", // BARU
     items: [
-      { no: "01", name: "Intimate", text: "Setiap foto memiliki hasil yang intim. Tidak ada kaku di dalam kamus saya." },
-      { no: "02", name: "Cinematic", text: "Cahaya lembut, warna hangat. Tiap frame seperti berbicara dengan audience." },
-      { no: "03", name: "Effortless", text: "Kamu cukup hadir, biarkan saya yang mengatasi semua ini." }
+      { no: "01", name: "Intimate", text: "Saya ingin fotonya terasa dekat dan akrab. Suasana kaku saya hindari." },
+      { no: "02", name: "Cinematic", text: "Saya suka cahaya yang lembut dan warna yang hangat. Tiap frame saya susun supaya bicara langsung ke audience." },
+      { no: "03", name: "Effortless", text: "Kamu cukup hadir dan santai. Sisanya biar saya yang urus." }
     ]
   },
   works: {
-    question: "Apa yang bisa kamu percaya?",
+    question: "Mau lihat buktinya?",
     title: "This is Capsule Memories"
   },
   selected: {
     title: "Selected Works",
-    intro: "Enam cerita. Satu rasa yang sama.", // BARU
+    intro: "Enam proyek pilihan saya. Pilih foto untuk memperbesar.", // BARU
     items: [
       { no: "01", slug: "farewell-party", name: "Farewell Party", meta: "The Hermitage Tribute Portfolio Hotel, Jakarta", frames: 6 },
       { no: "02", slug: "noodzilla", name: "Noodzilla", meta: "Brand Campaign, Jakarta", frames: 6 },
@@ -67,12 +67,12 @@ export const CONTENT = {
   capsule: {
     label: "Capsule Memories",
     slug: "capsule-memories",
-    intro: "Potongan momen yang masih terasa sampai sekarang.", // BARU
+    intro: "Potongan momen yang masih terasa buat saya sampai sekarang.", // BARU
     sets: [8, 10]
   },
   contact: {
     title: "Let’s talk!",
-    cta: "Ceritakan kebutuhan mu disini!",
+    cta: "Ceritakan kebutuhanmu, nanti kita cari idenya bareng.",
     channels: [
       { label: "Instagram", text: "@artivastudio.id", url: "https://www.instagram.com/artivastudio.id" },
       { label: "WhatsApp", text: "+62 851 2128 6440", url: "https://wa.me/6285121286440" }
@@ -80,12 +80,12 @@ export const CONTENT = {
   },
   ui: {
     skipIntro: "Lewati intro",
-    pause: "Jeda",
-    play: "Putar",
-    prev: "Sebelumnya",
-    next: "Berikutnya",
-    chapters: "Daftar chapter",
-    lightboxClose: "Tutup",
+    pause: "Jeda pergantian otomatis",
+    play: "Putar pergantian otomatis",
+    prev: "Bagian sebelumnya",
+    next: "Bagian berikutnya",
+    chapters: "Daftar bagian",
+    lightboxClose: "Tutup foto",
     lightboxPrev: "Foto sebelumnya",
     lightboxNext: "Foto berikutnya"
   }

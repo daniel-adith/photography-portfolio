@@ -1,0 +1,187 @@
+================================================================================
+DANIEL ADITH - PHOTOGRAPHY PORTFOLIO
+SELURUH DOKUMEN COPYWRITING WEBSITE (VERSI REVISI)
+================================================================================
+Struktur dan label bidang sama dengan versi sebelumnya. Hanya isi teks yang berubah.
+Nama proyek, lokasi, nama kanal, nomor telepon, dan alamat URL tidak diubah.
+Bagian "CATATAN PERUBAHAN" di akhir file hanya untuk ditinjau. Jangan dimasukkan ke website.
+
+--------------------------------------------------------------------------------
+1. METADATA & SEO (Pengaturan Tab Browser & Mesin Pencari)
+--------------------------------------------------------------------------------
+Judul Website (Title Tag) :
+Daniel Adith Portfolio
+
+Deskripsi Meta (SEO Description) :
+Saya Daniel Adith, fotografer untuk brand, hotel, dan berbagai acara. Lihat enam proyek pilihan saya.
+
+Nama Pemilik :
+Daniel Adith
+
+Tahun Hak Cipta :
+@2026
+
+
+--------------------------------------------------------------------------------
+2. MENU NAVIGASI (Header di Bagian Atas Layar)
+--------------------------------------------------------------------------------
+Menu 1 : About
+Menu 2 : Approach
+Menu 3 : Selected Works
+Menu 4 : Contact
+
+
+--------------------------------------------------------------------------------
+3. INTRO TEROWONGAN 3D (Tampilan Awal Saat Pertama Kali Website Dibuka)
+--------------------------------------------------------------------------------
+Kicker (Teks Kecil di Atas Judul) :
+Halo, ini portfolio saya
+
+Judul Utama Intro :
+The untold story in every frame
+
+Tombol Lewati Intro (Aria Label) :
+Lewati intro
+
+
+--------------------------------------------------------------------------------
+4. SCENE 1: HERO (Layar Utama Setelah Intro)
+--------------------------------------------------------------------------------
+Nama / Headline Besar :
+Daniel Adith
+
+Label Tahun / Monogram :
+@2026
+
+Teks Pendukung (Support Statement) :
+Saya memotret momen yang terasa nyata. Cahaya lembut, warna hangat, tanpa kaku.
+
+Tombol Tindakan Utama (Call to Action) :
+Let’s talk!
+
+
+--------------------------------------------------------------------------------
+5. SCENE 2: ABOUT (Tentang Daniel Adith)
+--------------------------------------------------------------------------------
+Judul Bagian :
+Kenalan dulu, saya Daniel.
+
+Paragraf 1 :
+Saya memotret untuk brand, hotel, dan berbagai acara.
+
+Paragraf 2 :
+Saya mencari momen yang terasa nyata di balik foto yang bagus. Banyak orang tidak menyadarinya. Hasilnya rapi dan tenang, tapi tetap terasa manusia.
+
+
+--------------------------------------------------------------------------------
+6. SCENE 3: APPROACH (Filosofi & Pendekatan Fotografi)
+--------------------------------------------------------------------------------
+Judul Bagian :
+Cara saya memotret
+
+Teks Pengantar :
+Tiga hal yang saya jaga di setiap frame.
+
+Poin 01 :
+- Nomor : 01
+- Nama Nilai : Intimate
+- Penjelasan : Saya ingin fotonya terasa dekat dan akrab. Suasana kaku saya hindari.
+
+Poin 02 :
+- Nomor : 02
+- Nama Nilai : Cinematic
+- Penjelasan : Saya suka cahaya yang lembut dan warna yang hangat. Tiap frame saya susun supaya bicara langsung ke audience.
+
+Poin 03 :
+- Nomor : 03
+- Nama Nilai : Effortless
+- Penjelasan : Kamu cukup hadir dan santai. Sisanya biar saya yang urus.
+
+
+--------------------------------------------------------------------------------
+7. SCENE 4: TRANSISI WORKS (Menuju Karya Pilihan)
+--------------------------------------------------------------------------------
+Kalimat Tanya :
+Mau lihat buktinya?
+
+Judul Transisi :
+This is Capsule Memories
+
+
+--------------------------------------------------------------------------------
+8. SCENE 5: SELECTED WORKS (Koleksi Enam Proyek Klien Utama)
+--------------------------------------------------------------------------------
+Judul Bagian :
+Selected Works
+
+Teks Pengantar :
+Enam proyek pilihan saya. Pilih foto untuk memperbesar.
+
+Daftar Proyek Klien :
+[01] Farewell Party
+     Lokasi / Meta : The Hermitage Tribute Portfolio Hotel, Jakarta
+
+[02] Noodzilla
+     Lokasi / Meta : Brand Campaign, Jakarta
+
+[03] Cotti Coffee
+     Lokasi / Meta : Brand Campaign, Jakarta
+
+[04] Noir Limousine
+     Lokasi / Meta : Brand Campaign, Switzerland
+
+[05] Senyum Museum Artravel
+     Lokasi / Meta : Brand Campaign, Jakarta
+
+[06] Urbahn International
+     Lokasi / Meta : Brand Campaign, Jakarta
+
+
+--------------------------------------------------------------------------------
+9. CAPSULE MEMORIES (Galeri Mozaik Kenangan Dinamis)
+--------------------------------------------------------------------------------
+Nama Koleksi :
+Capsule Memories
+
+Teks Pengantar :
+Potongan momen yang masih terasa buat saya sampai sekarang.
+
+
+--------------------------------------------------------------------------------
+10. SCENE 6: CONTACT & FOOTER (Halaman Kontak & Penutup)
+--------------------------------------------------------------------------------
+Judul Kontak :
+Let’s talk!
+
+Kalimat Ajakan (Call to Action) :
+Ceritakan kebutuhanmu, nanti kita cari idenya bareng.
+
+Saluran Kontak 1 (Instagram) :
+- Label : Instagram
+- Teks Tautan : @artivastudio.id
+- Alamat URL : https://www.instagram.com/artivastudio.id
+
+Saluran Kontak 2 (WhatsApp) :
+- Label : WhatsApp
+- Teks Tautan : +62 851 2128 6440
+- Alamat URL : https://wa.me/6285121286440
+
+Teks Footer / Hak Cipta :
+Daniel Adith  @2026
+
+
+--------------------------------------------------------------------------------
+11. UI CONTROLS & AKSESIBILITAS (Label Tombol Interaktif & Lightbox)
+--------------------------------------------------------------------------------
+Tombol Navigasi Chapter :
+- Tombol Jeda Autoplay : Jeda pergantian otomatis
+- Tombol Putar Autoplay : Putar pergantian otomatis
+- Tombol Chapter Sebelumnya : Bagian sebelumnya
+- Tombol Chapter Berikutnya : Bagian berikutnya
+- Label Wadah Chapter : Daftar bagian
+
+Tombol Pop-up Foto (Lightbox) :
+- Tombol Tutup Foto : Tutup foto
+- Tombol Foto Sebelumnya : Foto sebelumnya
+- Tombol Foto Berikutnya : Foto berikutnya
+================================================================================
