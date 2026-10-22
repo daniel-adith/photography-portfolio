@@ -38,45 +38,26 @@ export default function Home() {
   });
 
   const capsuleChapters: ChapterData[] = [];
-  if (CONTENT.capsule.sets.length > 0) {
-    // Set 1: 8 frames
-    const set1Frames = [];
-    for (let i = 1; i <= CONTENT.capsule.sets[0]; i++) {
-      set1Frames.push({
-        n: i,
-        photoUrl: getFrame(CONTENT.capsule.slug, i),
-      });
-    }
-    capsuleChapters.push({
-      type: "sheet",
-      setIndex: 0,
-      label: CONTENT.capsule.label,
-      slug: CONTENT.capsule.slug,
-      intro: CONTENT.capsule.intro,
-      frames: set1Frames,
-    });
-
-    // Set 2: 10 frames
-    const set2Frames = [];
-    for (let i = 1; i <= CONTENT.capsule.sets[1]; i++) {
-      const frameNum = CONTENT.capsule.sets[0] + i;
-      const photoUrl =
-        getFrame(CONTENT.capsule.slug, frameNum) ??
-        getFrame(CONTENT.capsule.slug, i);
-      set2Frames.push({
+  let frameOffset = 0;
+  CONTENT.capsule.sets.forEach((setCount, setIndex) => {
+    const setFrames = [];
+    for (let i = 1; i <= setCount; i++) {
+      const frameNum = frameOffset + i;
+      setFrames.push({
         n: frameNum,
-        photoUrl,
+        photoUrl: getFrame(CONTENT.capsule.slug, frameNum),
       });
     }
+    frameOffset += setCount;
     capsuleChapters.push({
       type: "sheet",
-      setIndex: 1,
+      setIndex,
       label: CONTENT.capsule.label,
       slug: CONTENT.capsule.slug,
       intro: CONTENT.capsule.intro,
-      frames: set2Frames,
+      frames: setFrames,
     });
-  }
+  });
 
   const allChapters: ChapterData[] = [...projectChapters, ...capsuleChapters];
 

@@ -79,8 +79,8 @@ export default function SelectedStage({
 
   const chapterNames = useMemo(
     () =>
-      chapters.map((ch, idx) =>
-        ch.type === "six" ? ch.name : `${ch.label} Set ${idx - 5}`
+      chapters.map((ch) =>
+        ch.type === "six" ? ch.name : `${ch.label} Set ${ch.setIndex + 1}`
       ),
     [chapters]
   );
@@ -326,15 +326,108 @@ export default function SelectedStage({
   // Render cards according to chapter layout
   const renderCards = () => {
     const frames = activeChapterData.frames;
+    const count = frames.length;
 
     if (activeChapterData.type === "six") {
-      const topFrames = frames.slice(0, 3);
-      const bottomFrames = frames.slice(3, 6);
+      if (count === 6) {
+        const topFrames = frames.slice(0, 3);
+        const bottomFrames = frames.slice(3, 6);
 
-      return (
-        <div className={styles.gridSix}>
-          <div className={styles.topRowSix}>
-            {topFrames.map((f, i) => (
+        return (
+          <div className={styles.gridSix}>
+            <div className={styles.topRowSix}>
+              {topFrames.map((f, i) => (
+                <FlipCard
+                  key={`${activeChapterData.slug}-${f.n}`}
+                  n={f.n}
+                  slug={activeChapterData.slug}
+                  alt={`${activeChapterData.name}, foto ${f.n}`}
+                  photoUrl={f.photoUrl}
+                  isFlipped={cardsFlipped[i] ?? false}
+                  durationMs={getCardDurationMs()}
+                  delayMs={getCardDelayMs(i)}
+                  shouldLoadImage={true}
+                  reducedMotion={reducedMotion}
+                  onCardClick={() => handleCardClick(i)}
+                />
+              ))}
+            </div>
+            <div className={styles.bottomRowSix}>
+              {bottomFrames.map((f, i) => {
+                const actualIdx = i + 3;
+                return (
+                  <FlipCard
+                    key={`${activeChapterData.slug}-${f.n}`}
+                    n={f.n}
+                    slug={activeChapterData.slug}
+                    alt={`${activeChapterData.name}, foto ${f.n}`}
+                    photoUrl={f.photoUrl}
+                    isFlipped={cardsFlipped[actualIdx] ?? false}
+                    durationMs={getCardDurationMs()}
+                    delayMs={getCardDelayMs(actualIdx)}
+                    shouldLoadImage={true}
+                    reducedMotion={reducedMotion}
+                    onCardClick={() => handleCardClick(actualIdx)}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        );
+      }
+
+      if (count === 5) {
+        const topFrames = frames.slice(0, 3);
+        const bottomFrames = frames.slice(3, 5);
+
+        return (
+          <div className={styles.gridFive}>
+            <div className={styles.topRowFive}>
+              {topFrames.map((f, i) => (
+                <FlipCard
+                  key={`${activeChapterData.slug}-${f.n}`}
+                  n={f.n}
+                  slug={activeChapterData.slug}
+                  alt={`${activeChapterData.name}, foto ${f.n}`}
+                  photoUrl={f.photoUrl}
+                  isFlipped={cardsFlipped[i] ?? false}
+                  durationMs={getCardDurationMs()}
+                  delayMs={getCardDelayMs(i)}
+                  shouldLoadImage={true}
+                  reducedMotion={reducedMotion}
+                  onCardClick={() => handleCardClick(i)}
+                />
+              ))}
+            </div>
+            <div className={styles.bottomRowFive}>
+              {bottomFrames.map((f, i) => {
+                const actualIdx = i + 3;
+                return (
+                  <FlipCard
+                    key={`${activeChapterData.slug}-${f.n}`}
+                    n={f.n}
+                    slug={activeChapterData.slug}
+                    alt={`${activeChapterData.name}, foto ${f.n}`}
+                    photoUrl={f.photoUrl}
+                    isFlipped={cardsFlipped[actualIdx] ?? false}
+                    durationMs={getCardDurationMs()}
+                    delayMs={getCardDelayMs(actualIdx)}
+                    shouldLoadImage={true}
+                    reducedMotion={reducedMotion}
+                    onCardClick={() => handleCardClick(actualIdx)}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        );
+      }
+
+      if (count === 4) {
+        // Varian C: 4 potret / 1 baris 4 kolom sama besar di desktop, 2x2 di mobile
+        return (
+          <div className={styles.gridFourCols}>
+            {frames.map((f, i) => (
               <FlipCard
                 key={`${activeChapterData.slug}-${f.n}`}
                 n={f.n}
@@ -350,34 +443,41 @@ export default function SelectedStage({
               />
             ))}
           </div>
-          <div className={styles.bottomRowSix}>
-            {bottomFrames.map((f, i) => {
-              const actualIdx = i + 3;
-              return (
-                <FlipCard
-                  key={`${activeChapterData.slug}-${f.n}`}
-                  n={f.n}
-                  slug={activeChapterData.slug}
-                  alt={`${activeChapterData.name}, foto ${f.n}`}
-                  photoUrl={f.photoUrl}
-                  isFlipped={cardsFlipped[actualIdx] ?? false}
-                  durationMs={getCardDurationMs()}
-                  delayMs={getCardDelayMs(actualIdx)}
-                  shouldLoadImage={true}
-                  reducedMotion={reducedMotion}
-                  onCardClick={() => handleCardClick(actualIdx)}
-                />
-              );
-            })}
-          </div>
+        );
+      }
+
+      // 1 sampai 3 frame: satu baris kolom sama lebar
+      return (
+        <div
+          className={styles.gridRow}
+          style={{ "--cols": count } as React.CSSProperties}
+        >
+          {frames.map((f, i) => (
+            <FlipCard
+              key={`${activeChapterData.slug}-${f.n}`}
+              n={f.n}
+              slug={activeChapterData.slug}
+              alt={`${activeChapterData.name}, foto ${f.n}`}
+              photoUrl={f.photoUrl}
+              isFlipped={cardsFlipped[i] ?? false}
+              durationMs={getCardDurationMs()}
+              delayMs={getCardDelayMs(i)}
+              shouldLoadImage={true}
+              reducedMotion={reducedMotion}
+              onCardClick={() => handleCardClick(i)}
+            />
+          ))}
         </div>
       );
     }
 
-    // Sheet layout (Capsule)
-    const isSheet10 = frames.length >= 10;
+    // Dynamic Sheet layout (Capsule)
+    const cols = Math.ceil(frames.length / 2);
     return (
-      <div className={isSheet10 ? styles.gridSheet10 : styles.gridSheet8}>
+      <div
+        className={styles.gridSheet}
+        style={{ "--sheet-cols": cols } as React.CSSProperties}
+      >
         {frames.map((f, i) => (
           <FlipCard
             key={`${activeChapterData.slug}-${f.n}`}

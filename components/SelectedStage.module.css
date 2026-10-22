@@ -90,7 +90,7 @@
   border-radius: 0;
 }
 
-/* Six Project Layout */
+/* Six Project Layout (6 frames - TIDAK BERUBAH) */
 .gridSix {
   width: 100%;
   height: 100%;
@@ -129,7 +129,160 @@
   }
 }
 
-/* Sheet Layout (Capsule) */
+/* Five Project Layout (5 frames: baris atas 3 sel 1:1:2, baris bawah 2 sel 1:1, rasio 1.4:1) */
+.gridFive {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1.4fr 1fr;
+  row-gap: 8px;
+  border-radius: 0;
+}
+
+.topRowFive {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  column-gap: 8px;
+  height: 100%;
+  border-radius: 0;
+}
+
+.bottomRowFive {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 8px;
+  height: 100%;
+  border-radius: 0;
+}
+
+@media (max-width: 767px) {
+  .gridFive {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .topRowFive,
+  .bottomRowFive {
+    display: contents;
+  }
+
+  .bottomRowFive > :last-child {
+    grid-column: span 2;
+  }
+}
+
+/* Four Frames Layout - Varian C: 4 potret / 1 baris 4 kolom sama besar di desktop */
+.gridFourCols {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  gap: 8px;
+  border-radius: 0;
+}
+
+@media (max-width: 767px) {
+  .gridFourCols {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 6px;
+  }
+}
+
+/* Four Frames Layout - Varian A: 2 potret & 2 lanskap (area "a b b c" dan "a d d c") */
+.gridFourAreas {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas:
+    "a b b c"
+    "a d d c";
+  gap: 8px;
+  border-radius: 0;
+}
+
+.areaA { grid-area: a; }
+.areaB { grid-area: b; }
+.areaD { grid-area: d; }
+.areaC { grid-area: c; }
+
+@media (max-width: 767px) {
+  .gridFourAreas {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: none;
+    gap: 6px;
+  }
+  .areaA, .areaB, .areaD, .areaC {
+    grid-area: auto;
+  }
+}
+
+/* Four Frames Layout - Varian B: 4 lanskap (2x2) */
+.gridFourGrid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 8px;
+  border-radius: 0;
+}
+
+@media (max-width: 767px) {
+  .gridFourGrid {
+    gap: 6px;
+  }
+}
+
+/* 1 to 3 Frames Layout: satu baris kolom sama lebar */
+.gridRow {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), 1fr);
+  grid-template-rows: 1fr;
+  gap: 8px;
+  border-radius: 0;
+}
+
+@media (max-width: 767px) {
+  .gridRow {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .gridRow > :last-child:nth-child(odd) {
+    grid-column: span 2;
+  }
+}
+
+/* Dynamic Sheet Layout (Capsule Memories): tiap grid 2 baris, kolom = ceil(total / 2) */
+.gridSheet {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(var(--sheet-cols, 4), 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 8px;
+  border-radius: 0;
+}
+
+@media (max-width: 767px) {
+  .gridSheet {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(var(--sheet-cols, 4), 1fr);
+    gap: 6px;
+  }
+  .gridSheet > :last-child:nth-child(odd) {
+    grid-column: span 2;
+  }
+}
+
+/* Legacy aliases for backward compatibility */
 .gridSheet8 {
   width: 100%;
   height: 100%;

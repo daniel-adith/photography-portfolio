@@ -47,7 +47,7 @@ export const CONTENT = {
     items: [
       { no: "01", slug: "farewell-party", name: "Farewell Party", meta: "The Hermitage Tribute Portfolio Hotel, Jakarta", frames: 6 },
       { no: "02", slug: "noodzilla", name: "Noodzilla", meta: "Brand Campaign, Jakarta", frames: 6 },
-      { no: "03", slug: "cotti-coffee", name: "Cotti Coffee", meta: "Brand Campaign, Jakarta", frames: 6 },
+      { no: "03", slug: "cotti-coffee", name: "Cotti Coffee", meta: "Brand Campaign, Jakarta", frames: 4 },
       { no: "04", slug: "noir-limousine", name: "Noir Limousine", meta: "Brand Campaign, Switzerland", frames: 6 },
       { no: "05", slug: "senyum-museum-artravel", name: "Senyum Museum Artravel", meta: "Brand Campaign, Jakarta", frames: 6 },
       { no: "06", slug: "urbahn-international", name: "Urbahn International", meta: "Brand Campaign, Jakarta", frames: 6 }
@@ -61,7 +61,7 @@ export const CONTENT = {
     { slug: "senyum-museum-artravel", n: 1 },
     { slug: "urbahn-international", n: 1 },
     { slug: "farewell-party", n: 2 },
-    { slug: "noodzilla", n: 2 },
+    { slug: "noir-limousine", n: 2 },
     { slug: "cotti-coffee", n: 2 }
   ],
   capsule: {
