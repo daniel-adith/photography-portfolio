@@ -1,0 +1,95 @@
+.container {
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0;
+  position: relative;
+  z-index: 10;
+}
+
+/* Left: 8 progress segments */
+.segmentsGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 480px;
+  border-radius: 0;
+}
+
+@media (max-width: 767px) {
+  .segmentsGroup {
+    max-width: 220px;
+    gap: 4px;
+  }
+}
+
+.segmentButton {
+  flex: 1;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.segmentButton:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: 3px;
+}
+
+.segmentTrack {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background-color: var(--line);
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.segmentFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: var(--paper);
+  border-radius: 0;
+  transition: width 100ms linear;
+}
+
+/* Right: Navigation action buttons */
+.buttonsGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 0;
+}
+
+.actionButton {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.actionButton:hover {
+  background-color: var(--paper);
+  color: var(--ink);
+}
+
+.actionButton:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: 3px;
+}

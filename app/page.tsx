@@ -1,69 +1,96 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { CONTENT } from "@/content/content";
+import { getFrame } from "@/lib/photos";
+import Intro, { TunnelCardItem } from "@/components/Intro";
+import Stage from "@/components/Stage";
+import { ChapterData } from "@/components/SelectedStage";
 
 export default function Home() {
+  // Server-side calculation of tunnel cards for 3D Intro
+  const tunnelCards: TunnelCardItem[] = CONTENT.tunnel.map((item) => {
+    const project = CONTENT.selected.items.find((s) => s.slug === item.slug);
+    const title = project ? project.name : item.slug;
+    const photoUrl = getFrame(item.slug, item.n);
+    return {
+      slug: item.slug,
+      n: item.n,
+      title,
+      photoUrl,
+    };
+  });
+
+  // Server-side calculation of 8 chapters (6 projects + 2 capsule sets)
+  const projectChapters: ChapterData[] = CONTENT.selected.items.map((p) => {
+    const frames = [];
+    for (let i = 1; i <= p.frames; i++) {
+      frames.push({
+        n: i,
+        photoUrl: getFrame(p.slug, i),
+      });
+    }
+    return {
+      type: "six",
+      no: p.no,
+      slug: p.slug,
+      name: p.name,
+      meta: p.meta,
+      frames,
+    };
+  });
+
+  const capsuleChapters: ChapterData[] = [];
+  if (CONTENT.capsule.sets.length > 0) {
+    // Set 1: 8 frames
+    const set1Frames = [];
+    for (let i = 1; i <= CONTENT.capsule.sets[0]; i++) {
+      set1Frames.push({
+        n: i,
+        photoUrl: getFrame(CONTENT.capsule.slug, i),
+      });
+    }
+    capsuleChapters.push({
+      type: "sheet",
+      setIndex: 0,
+      label: CONTENT.capsule.label,
+      slug: CONTENT.capsule.slug,
+      intro: CONTENT.capsule.intro,
+      frames: set1Frames,
+    });
+
+    // Set 2: 10 frames
+    const set2Frames = [];
+    for (let i = 1; i <= CONTENT.capsule.sets[1]; i++) {
+      const frameNum = CONTENT.capsule.sets[0] + i;
+      const photoUrl =
+        getFrame(CONTENT.capsule.slug, frameNum) ??
+        getFrame(CONTENT.capsule.slug, i);
+      set2Frames.push({
+        n: frameNum,
+        photoUrl,
+      });
+    }
+    capsuleChapters.push({
+      type: "sheet",
+      setIndex: 1,
+      label: CONTENT.capsule.label,
+      slug: CONTENT.capsule.slug,
+      intro: CONTENT.capsule.intro,
+      frames: set2Frames,
+    });
+  }
+
+  const allChapters: ChapterData[] = [...projectChapters, ...capsuleChapters];
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      <Intro
+        cards={tunnelCards}
+        kicker={CONTENT.intro.kicker}
+        title={CONTENT.intro.title}
+      />
+
+      <main id="main-content">
+        <Stage chapters={allChapters} />
       </main>
-    </div>
+    </>
   );
 }

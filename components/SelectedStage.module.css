@@ -1,0 +1,165 @@
+.stageWrapper {
+  width: 100%;
+  height: 100svh;
+  padding-top: 56px;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--ink);
+  overflow: hidden;
+  border-radius: 0;
+}
+
+@media (min-width: 768px) {
+  .stageWrapper {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+/* Chapter Title Bar (One line above grid) */
+.titleBar {
+  width: 100%;
+  height: clamp(64px, 11vh, 100px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0;
+  transition: opacity 500ms cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+.titleLeft {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  border-radius: 0;
+}
+
+.chapterNumber {
+  font-family: var(--font-mono), monospace;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  border-radius: 0;
+}
+
+.chapterTitle {
+  font-family: var(--font-body), sans-serif;
+  font-size: clamp(28px, 4.5vw, 64px);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--paper);
+  border-radius: 0;
+}
+
+.titleRight {
+  border-radius: 0;
+  text-align: right;
+  max-width: 45%;
+}
+
+.chapterMetaMono {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-radius: 0;
+}
+
+.capsuleIntro {
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted);
+  border-radius: 0;
+}
+
+/* Grid Area (Fills remaining height between title and controls) */
+.gridArea {
+  position: relative;
+  width: 100%;
+  height: calc(100svh - 56px - clamp(64px, 11vh, 100px) - 72px);
+  min-height: 240px;
+  perspective: 1000px;
+  border-radius: 0;
+}
+
+/* Six Project Layout */
+.gridSix {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1.6fr 1fr;
+  row-gap: 8px;
+  border-radius: 0;
+}
+
+.topRowSix {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  column-gap: 8px;
+  height: 100%;
+  border-radius: 0;
+}
+
+.bottomRowSix {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 8px;
+  height: 100%;
+  border-radius: 0;
+}
+
+@media (max-width: 767px) {
+  .gridSix {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .topRowSix,
+  .bottomRowSix {
+    display: contents;
+  }
+}
+
+/* Sheet Layout (Capsule) */
+.gridSheet8 {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 8px;
+  border-radius: 0;
+}
+
+.gridSheet10 {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 8px;
+  border-radius: 0;
+}
+
+@media (max-width: 767px) {
+  .gridSheet8 {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 6px;
+  }
+
+  .gridSheet10 {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 6px;
+  }
+}
