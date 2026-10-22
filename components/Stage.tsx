@@ -17,6 +17,7 @@ import Approach from "./Approach";
 import Works from "./Works";
 import SelectedStage, { ChapterData } from "./SelectedStage";
 import Contact from "./Contact";
+import { INTRO_ONCE_PER_SESSION } from "@/lib/intro-config";
 import styles from "./Stage.module.css";
 
 export const SCENE_IDS = [
@@ -167,7 +168,11 @@ export default function Stage({ chapters }: StageProps) {
       if (hash) {
         const target = SCENE_IDS.indexOf(hash as SceneId);
         if (target >= 0 && target !== state.sceneIndex) {
-          sessionStorage.setItem("intro_seen", "1");
+          if (INTRO_ONCE_PER_SESSION) {
+            try {
+              sessionStorage.setItem("intro_seen", "1");
+            } catch {}
+          }
           document.documentElement.setAttribute("data-intro", "off");
           dispatch({ type: "SET_INITIAL_SCENE", targetIndex: target });
           return;

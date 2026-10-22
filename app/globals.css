@@ -59,10 +59,21 @@ body {
 header,
 main,
 footer,
-section,
-#intro-layer {
+section {
   position: relative;
   z-index: 2;
+}
+
+/* While intro is on, prevent background content from receiving pointer events */
+html[data-intro="on"] header,
+html[data-intro="on"] main {
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+/* While intro is off, ensure intro layer is immediately hidden */
+html[data-intro="off"] #intro-layer {
+  display: none !important;
 }
 
 a {

@@ -1,3 +1,4 @@
+// Jangan hapus. Intro adalah bagian inti situs.
 "use client";
 
 import {
@@ -11,6 +12,11 @@ import {
 import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import { CONTENT } from "@/content/content";
+import {
+  INTRO_ONCE_PER_SESSION,
+  INTRO_END_HOLD_MS,
+  INTRO_EXIT_MS,
+} from "@/lib/intro-config";
 import styles from "./Intro.module.css";
 
 export interface TunnelCardItem {
@@ -181,26 +187,39 @@ export default function Intro({ cards, kicker, title, onComplete }: IntroProps) 
     finishTimeoutRef.current = setTimeout(() => {
       setIntroState("off");
       document.documentElement.setAttribute("data-intro", "off");
-      try {
-        sessionStorage.setItem("intro_seen", "1");
-      } catch {
-        // ignore sessionStorage errors
+      if (INTRO_ONCE_PER_SESSION) {
+        try {
+          sessionStorage.setItem("intro_seen", "1");
+        } catch {
+          // ignore sessionStorage errors
+        }
       }
       onComplete?.();
-      const mainEl = document.querySelector("main");
-      if (mainEl) {
-        mainEl.focus();
+
+      const headerEl = document.getElementById("site-header");
+      const mainEl = document.getElementById("main-content");
+      const footerEl = document.getElementById("site-footer");
+      headerEl?.removeAttribute("inert");
+      mainEl?.removeAttribute("inert");
+      footerEl?.removeAttribute("inert");
+
+      const heroHeading = document.querySelector<HTMLElement>("#scene-hero h1");
+      if (heroHeading) {
+        heroHeading.setAttribute("tabindex", "-1");
+        heroHeading.focus();
       }
-    }, 700);
+    }, INTRO_EXIT_MS);
   }, [onComplete]);
 
-  // Check initial state: reduced motion, sessionStorage, or html[data-intro="off"]
+  // Check initial state: reduced motion, sessionStorage (if enabled), or html[data-intro="off"]
   useEffect(() => {
     let shouldSkip = false;
     try {
-      const seen = sessionStorage.getItem("intro_seen");
-      if (seen === "1" || seen === "true") {
-        shouldSkip = true;
+      if (INTRO_ONCE_PER_SESSION) {
+        const seen = sessionStorage.getItem("intro_seen");
+        if (seen === "1" || seen === "true") {
+          shouldSkip = true;
+        }
       }
       if (
         window.location.hash &&
@@ -227,6 +246,20 @@ export default function Intro({ cards, kicker, title, onComplete }: IntroProps) 
     }
   }, [prefersReduced, onComplete]);
 
+  // Listen for hash changes so navigating to a hash scene immediately dismisses intro
+  useEffect(() => {
+    const handleHash = () => {
+      const h = window.location.hash;
+      if (h && ["#about", "#approach", "#works", "#selected", "#contact"].includes(h)) {
+        setIntroState("off");
+        document.documentElement.setAttribute("data-intro", "off");
+        onComplete?.();
+      }
+    };
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, [onComplete]);
+
   // Stage dimension listener
   useEffect(() => {
     const updateDimensions = () => {
@@ -250,7 +283,7 @@ export default function Intro({ cards, kicker, title, onComplete }: IntroProps) 
       if (latest >= 0.999 && !exitTimeoutRef.current && introState === "on") {
         exitTimeoutRef.current = setTimeout(() => {
           completeIntro();
-        }, 400);
+        }, INTRO_END_HOLD_MS);
       }
     });
 
@@ -260,11 +293,9 @@ export default function Intro({ cards, kicker, title, onComplete }: IntroProps) 
     };
   }, [smoothProgress, introState, completeIntro]);
 
-  // Wheel listener
+  // Wheel listener attached to window during active intro
   useEffect(() => {
     if (introState !== "on") return;
-    const el = containerRef.current;
-    if (!el) return;
 
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
@@ -274,15 +305,13 @@ export default function Intro({ cards, kicker, title, onComplete }: IntroProps) 
       rawProgress.set(next);
     };
 
-    el.addEventListener("wheel", handleWheel, { passive: false });
-    return () => el.removeEventListener("wheel", handleWheel);
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    return () => window.removeEventListener("wheel", handleWheel);
   }, [rawProgress, introState]);
 
   // Touch listener (swipe up advances, swipe down decreases)
   useEffect(() => {
     if (introState !== "on") return;
-    const el = containerRef.current;
-    if (!el) return;
 
     let touchStartY = 0;
 
@@ -305,12 +334,12 @@ export default function Intro({ cards, kicker, title, onComplete }: IntroProps) 
       }
     };
 
-    el.addEventListener("touchstart", handleTouchStart, { passive: true });
-    el.addEventListener("touchmove", handleTouchMove, { passive: false });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
 
     return () => {
-      el.removeEventListener("touchstart", handleTouchStart);
-      el.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
     };
   }, [rawProgress, introState]);
 
@@ -330,6 +359,7 @@ export default function Intro({ cards, kicker, title, onComplete }: IntroProps) 
       } else if (e.key === "End") {
         e.preventDefault();
         rawProgress.set(1);
+        completeIntro();
       } else if (e.key === "Tab") {
         // Tab trapping: keep focus on skip button
         e.preventDefault();
@@ -339,7 +369,14 @@ export default function Intro({ cards, kicker, title, onComplete }: IntroProps) 
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [rawProgress, introState]);
+  }, [rawProgress, introState, completeIntro]);
+
+  // Initial focus on skip button for keyboard accessibility and Tab trapping
+  useEffect(() => {
+    if (introState === "on") {
+      skipButtonRef.current?.focus();
+    }
+  }, [introState]);
 
   // Manage inert on background content while intro is active
   useEffect(() => {

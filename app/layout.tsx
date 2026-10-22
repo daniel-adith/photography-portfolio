@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import { CONTENT } from "@/content/content";
+import { INTRO_ONCE_PER_SESSION } from "@/lib/intro-config";
 import "./globals.css";
 
 const hankenGrotesk = Hanken_Grotesk({
@@ -32,20 +33,21 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      data-intro="on"
       suppressHydrationWarning
       className={`${hankenGrotesk.variable} ${ibmPlexMono.variable}`}
     >
       <head>
+        {/* Jangan hapus. Intro adalah bagian inti situs. */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){
               try {
-                var seen = sessionStorage.getItem("intro_seen");
+                var oncePerSession = ${INTRO_ONCE_PER_SESSION};
+                var seen = oncePerSession ? sessionStorage.getItem("intro_seen") : null;
                 var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
                 var hash = window.location.hash;
                 var hasHash = hash && ["#about", "#approach", "#works", "#selected", "#contact"].indexOf(hash) !== -1;
-                if (seen === "1" || seen === "true" || reduced || hasHash) {
+                if ((oncePerSession && (seen === "1" || seen === "true")) || reduced || hasHash) {
                   document.documentElement.setAttribute("data-intro", "off");
                 } else {
                   document.documentElement.setAttribute("data-intro", "on");
@@ -58,7 +60,7 @@ export default function RootLayout({
         />
         <noscript>
           <style>{`
-            [data-intro="on"] #intro-layer { display: none !important; }
+            #intro-layer { display: none !important; }
             html, body { overflow: auto !important; height: auto !important; }
           `}</style>
         </noscript>
